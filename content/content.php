@@ -27,6 +27,10 @@
 	</div><!-- .article-content -->
 
 	<footer class="article-footer">
+		<div class="tags-links clearfix">
+			<?php echo get_the_tag_list('', ' '); ?>
+		</div>
+		
 		<div class="article-meta clearfix">
 			<?php edit_post_link( 'Edit', '<span class="edit-link">', '</span>' ); ?>
 			<?php hiline_entry_meta(); ?>

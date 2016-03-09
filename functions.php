@@ -48,8 +48,20 @@ function hiline_setup() {
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus( array(
 		'primary'   => 'Primary Menu',
-		'secondary' => 'Category Links Menu',
+		'section' => 'Section Menu',
 		'social'    => 'Social Links Menu',
+	) );
+
+	/*
+	 * Switch default core markup for search form, comment form, and comments
+	 * to output valid HTML5.
+	 */
+	add_theme_support( 'html5', array(
+		'search-form',
+		'comment-form',
+		'comment-list',
+		'gallery',
+		'caption',
 	) );
 
 	// Hide the admin bar for all users
@@ -80,6 +92,11 @@ function hiline_setup() {
 	}
 	add_action( 'post_class', 'hiline_first_post_class' );
 
+	function hiline_excerpt_length($length) {
+    		return 30;
+	}
+	add_filter('excerpt_length', 'hiline_excerpt_length', 999);
+
 }
 endif; // hiline_setup
 add_action( 'after_setup_theme', 'hiline_setup' );
@@ -101,10 +118,10 @@ function hiline_scripts() {
 	wp_enqueue_script( 'fitvids', get_template_directory_uri() . '/js/jquery.fitvids.js', array( 'jquery' ), true, false );
 
 	// Load main scripts
-	wp_enqueue_script( 'hiline-script', get_template_directory_uri() . '/js/scripts.js', array( 'jquery' ), true, true );
+	wp_enqueue_script( 'hiline-script', get_template_directory_uri() . '/js/scripts.js', array( 'jquery' ), true, false );
 
 	// Add custom fonts, used in the main stylesheet.
-	wp_enqueue_style( 'hiline-fonts', 'https://fonts.googleapis.com/css?family=Roboto:400,700italic,700,400italic,300,300italic|Roboto+Condensed:400,300,300italic,400italic,700,700italic|Noto+Serif:400,400italic,700,700italic', array(), null );
+	wp_enqueue_style( 'hiline-fonts', 'https://fonts.googleapis.com/css?family=Roboto:400,700italic,700,400italic,300,300italic|Roboto+Condensed:400,300,300italic,400italic,700,700italic|EB+Garamond', array(), null );
 
 }
 add_action( 'wp_enqueue_scripts', 'hiline_scripts' );
